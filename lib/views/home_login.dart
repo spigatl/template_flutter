@@ -14,8 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   //controller of form
-  TextEditingController _loginController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   //password change visible/hide
   bool _showPassword = false;

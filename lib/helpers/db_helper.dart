@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/login.dart';
@@ -43,6 +45,11 @@ class DatabaseHelper {
     return await db.query('users', where: 'email = ?', whereArgs: [user.email]);
   }
 
+  Future printDatabaseContent() async {
+  final db = await instance.database;
+  final List<Map<String, dynamic>> maps = await db.query('users');
+  print(maps);
+}
 
   Future<List<User>> getUsers() async {
     final db = await instance.database;
