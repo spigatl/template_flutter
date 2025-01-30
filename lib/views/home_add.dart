@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:template_flutter/helpers/db_helper.dart';
 import 'package:template_flutter/models/login.dart';
-import 'package:template_flutter/views/home_page.dart';
-import 'package:template_flutter/routes/AppRoutes.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AddPage extends StatefulWidget {
+  const AddPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _AddPageState createState() => _AddPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AddPageState extends State<AddPage> {
   final _formKey = GlobalKey<FormState>();
 
   //controller of form
@@ -35,35 +33,16 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
 
-      // Declare a variável e armazene o retorno do selectUser
-      List<Map<String, Object?>> userList =
-          await DatabaseHelper.instance.selectUser(user);
-
-      if (userList != null && userList.isNotEmpty) {
-        final storedUser = userList[0];
-
-        // Compara a senha fornecida com a senha armazenada no banco de dados
-        if (storedUser['password'] == user.password) {
-          // Senha correta: login bem-sucedido
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login bem-sucedido!')),
-          );
-          // Redireciona para a próxima tela após o login
-          Navigator.pushReplacementNamed(context, Routes.home);
-        }
-      } else {
-        // Usuário não encontrado
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Usuário não encontrado!')),
-        );
-      }
+      await DatabaseHelper.instance.addUser(user);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Usuario Cadastrado com sucesso')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: const Text('Cadastrar')),
       body: Center(
         child: Column(
           children: [

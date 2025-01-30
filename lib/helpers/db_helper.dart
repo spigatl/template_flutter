@@ -11,7 +11,7 @@ class DatabaseHelper {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('users.db');
+    _database = await _initDB('users2.db');
     return _database!;
   }
 
@@ -35,14 +35,14 @@ class DatabaseHelper {
 
   Future<int> addUser(User user) async {
     final db = await instance.database;
-    return await db.insert('users', user.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert('users', user.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Map<String, Object?>>> selectUser(User user) async {
     final db = await instance.database;
     return await db.query('users', where: 'email = ?', whereArgs: [user.email]);
   }
-
 
   Future<List<User>> getUsers() async {
     final db = await instance.database;

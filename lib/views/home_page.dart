@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meucontrole/routes/AppRoutes.dart';
+import 'package:template_flutter/routes/AppRoutes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,6 +41,12 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(context, Routes.password);
                   },
                   child: const Text('Esqueceu a senha?'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.add);
+                  },
+                  child: const Text('Cadastrar'),
                 ),
               ],
             ),
