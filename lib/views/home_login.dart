@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:template_flutter/helpers/db_helper.dart';
 import 'package:template_flutter/models/login.dart';
-import 'package:template_flutter/views/home_page.dart';
 import 'package:template_flutter/routes/AppRoutes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
       List<Map<String, Object?>> userList =
           await DatabaseHelper.instance.selectUser(user);
 
-      if (userList != null && userList.isNotEmpty) {
+      if (userList.isNotEmpty) {
         final storedUser = userList[0];
 
         // Compara a senha fornecida com a senha armazenada no banco de dados
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
             SnackBar(content: Text('Login bem-sucedido!')),
           );
           // Redireciona para a próxima tela após o login
-          Navigator.pushReplacementNamed(context, Routes.home);
+          Navigator.pushReplacementNamed(context, Routes.dashboard);
         }
       } else {
         // Usuário não encontrado
